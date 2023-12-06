@@ -1,0 +1,198 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    <header>
+        <div class="header-logo">
+            {% include '@__includes/logo.html.twig' %}
+        </div>
+        <div class="header-content">
+            <h1>
+                Pdf generator guide
+            </h1>
+        </div>
+    </header>
+{% endblock %}
+
+{# {% block _main %} #}
+{#    <div class="grid"> #}
+{#        <div class="header"> #}
+{#            <div class="header-logo"> #}
+{#                <h1>LOGO</h1> #}
+{#            </div> #}
+{#            <div class="header-content"> #}
+{#                <span>item1</span> #}
+{#                <span>item2</span> #}
+{#                <span>item3</span> #}
+{#            </div> #}
+{#        </div> #}
+{#        <div class="item">Lorem ipsum dolor.</div> #}
+{#        <div class="item">Lorem ipsum dolor.</div> #}
+{#        <div class="item">Lorem ipsum dolor.</div> #}
+{#        <div class="item">Lorem ipsum dolor.</div> #}
+{#    </div> #}
+{# {% endblock %} #}
+
+{% block main %}
+    <div class="container">
+        <main class="container-main">
+            <article id="about">
+                <h3>О АПИ</h3>
+                <section>
+                    <h4>Назначение</h4>
+                    <p>
+                        Сервис предназначен для генерации Pdf документов из HTML разметки с использованием рендеринга,
+                        совместимого с CSS 2.1.
+                    </p>
+                    <p>
+                        Поддерживается большинсво HTML элементов, поддержка загрузки внешних стилей, встроенных тегов
+                        стилей и атрибуты стилей отдельных HTML тегов
+                    </p>
+                </section>
+                <section>
+                    <h4>Функции</h4>
+                    <ul>
+                        <li>
+                            <p>
+                                Обрабатывает большинство свойств CSS 2.1 и несколько свойств CSS 3, включая правила
+                                <code class="code">@import</code>, <code class="code">@media</code> и <code
+                                        class="code">@page</code>.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Поддерживает большинство презентационных атрибутов HTML 4.0 и HTML 5.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Поддерживает внешние таблицы стилей.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Поддерживает сложные таблицы, включая диапазоны строк и столбцов, отдельные и свернутые
+                                модели границ, индивидуальный стиль ячеек.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Поддержка изображений (gif, png (8, 24 и 32 бит с альфа-каналом), bmp и jpeg).
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Базовая поддержка SVG.
+                            </p>
+                        </li>
+                    </ul>
+                </section>
+            </article>
+
+            <article id="security">
+                <h3>Безопасность</h3>
+                <section>
+                    <p>
+                        Доступ к АПИ для генерации документов доступна только с использованием АПИ ключа. Сгенерировать
+                        ключь можно в <a href="/room">личном кабинете</a> (доступ предаставляется сотрудникам
+                        университета по заявке).
+                    </p>
+                    <p>
+                        Доступ к файлам на сервере доступна по ссылке на файл.
+                    </p>
+                    <p>
+
+                    </p>
+                </section>
+            </article>
+
+            <article id="styles">
+                <h3>Стили</h3>
+                <section>
+                    <p>
+
+                    </p>
+                </section>
+            </article>
+
+            <article id="fonts">
+                <h3>Шрифты</h3>
+                <section>
+                    <h4>Встроенные и загружаемые шрифты</h4>
+                    <p>
+                        PDF-документы внутренне поддерживают следующие шрифты: <code>Helvetica</code>,
+                        <code>Times-Roman</code>, <code>Courier</code>, <code>Zapf-Dingbats</code> и <code>Symbol</code>.
+                        Эти шрифты поддерживают только кодировку Windows ANSI. Чтобы в PDF-файле отображались символы,
+                        недоступные в Windows ANSI, необходимо указать внешний шрифт. Есть возможность встроит любой
+                        указанный шрифт в PDF-файл, если доступен по ссылке правилах CSS
+                        <code class="code">@font-face</code>.
+                    </p>
+                    <p>
+                        Шрифты DejaVu TrueType были предварительно установлены, чтобы обеспечить охват
+                        символов Юникода по умолчанию. Чтобы использовать шрифты DejaVu, укажите шрифт в вашей таблице
+                        стилей, например (для DejaVu Sans):
+                    </p>
+
+                    <pre class="code">
+element {
+    font-family: DejaVu Sans;
+}
+                    </pre>
+
+                    <p>
+                        Доступны следующие шрифты DejaVu 2.34: <code>DejaVu Sans</code>, <code>DejaVu
+                            Serif</code> и <code>DejaVu Sans Mono</code>.
+                    </p>
+                </section>
+                <section>
+                    <h4>Загружаемые шрифты через CSS</h4>
+                    <p>
+                        CSS позволяет загружать стронние шрифты через дерективу <code class="code">@font-face</code>.
+                        Разместите ссылку на подключаемый CSS файл в разметку HTML. Загрузка внешних ресурсов должна
+                        быть доступна сервису.
+                    </p>
+                </section>
+            </article>
+
+            <article id="storage">
+                <h3>Сохранение на сервере</h3>
+                <section>
+                    <p>
+                        Сервис позволяет сохранять сгенерированные документы и отдавать их пот требованию.
+                    </p>
+                </section>
+            </article>
+        </main>
+        <aside class="container-secondary">
+            <nav class="aside-nav">
+                <ul>
+                    <li>
+                        <a href="#about">О сервисе</a>
+                    </li>
+                    <li>
+                        <a href="#security">Безопасность</a>
+                    </li>
+                    <li>
+                        <a href="#styles">Стили</a>
+                    </li>
+                    <li>
+                        <a href="#fonts">Шрифты</a>
+                    </li>
+                    <li>
+                        <a href="#storage">Сохранение на сервере</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    <footer>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur debitis distinctio dolores eaque iste
+            minima molestiae nemo numquam praesentium sapiente! A exercitationem fugit impedit ipsa officia quas
+            repellat reprehenderit ut?
+        </p>
+    </footer>
+{% endblock %}

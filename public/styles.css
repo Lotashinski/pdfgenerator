@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine&display=swap');
+
+body {
+    font-family: 'Tangerine', serif;
+}
+
+.red {
+    color: red;
+}

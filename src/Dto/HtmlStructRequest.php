@@ -9,7 +9,7 @@ class HtmlStructRequest
 
     private string $paper = "A4";
 
-    private string $html = "";
+    private array $html = [""];
 
     private ?string $css = null;
 
@@ -41,12 +41,12 @@ class HtmlStructRequest
         $this->paper = $paper;
     }
 
-    public function getHtml(): string
+    public function getHtml(): array
     {
         return $this->html;
     }
 
-    public function setHtml(string $html): void
+    public function setHtml(array $html): void
     {
         $this->html = $html;
     }
