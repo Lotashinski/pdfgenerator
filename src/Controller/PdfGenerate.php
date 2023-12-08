@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Dto\HtmlStructRequest;
+use App\Dto\GeneratorRequest;
 use App\Service\DocumentGeneratorService;
 use App\Service\PdfStoreService;
 use App\Util\RandomString;
@@ -32,12 +32,15 @@ class PdfGenerate
     {
     }
 
+    /**
+     * @throws \Exception
+     */
     #[Route('/generator', name: 'app_pdf_generator', methods: ['POST'])]
     public function generate(Request $request): Response
     {
         $data = $request->getContent();
 
-        $dto = $this->serializer->deserialize($data, HtmlStructRequest::class, 'json',
+        $dto = $this->serializer->deserialize($data, GeneratorRequest::class, 'json',
             [AbstractObjectNormalizer::DEEP_OBJECT_TO_POPULATE]);
 
         $pdf = $this->documentGeneratorService->generate($dto);

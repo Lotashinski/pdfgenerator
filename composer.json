@@ -24,7 +24,6 @@
         "symfony/runtime": "6.3.*",
         "symfony/security-bundle": "6.3.*",
         "symfony/serializer": "6.3.*",
-        "symfony/webpack-encore-bundle": "^2.1",
         "symfony/yaml": "6.3.*",
         "twig/intl-extra": "^3"
     },

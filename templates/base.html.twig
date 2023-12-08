@@ -2,27 +2,36 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>
         {% block title %}
-            Welcome!
+            ИАЦ ГрГУ PDF Generator guide
         {% endblock %}
     </title>
-    <link rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-    {% block stylesheets %}
+     {% block stylesheets %}
 
         <link rel="stylesheet" href="/css/styles.css">
 
     {% endblock %}
 
     {% block javascripts %}
-
     {% endblock %}
 </head>
 <body>
 {% block body %}
     <div class="wrapper">
         {% block nav %}
+            <header>
+                <a class="header-logo" href="/">
+                    {% include '@__includes/logo.html.twig' %}
+                </a>
+                <div class="header-content">
+                    <h1>
+                        Pdf generator guide
+                    </h1>
+                    <a href="/login">Вход</a>
+                </div>
+            </header>
         {% endblock %}
 
         {% block main %}
@@ -32,6 +41,8 @@
         {% endblock %}
     </div>
 {% endblock %}
+
+<script src="/js/script.js"></script>
 
 </body>
 </html>

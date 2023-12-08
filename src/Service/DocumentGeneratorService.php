@@ -3,44 +3,34 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Dto\HtmlStructRequest;
-use Dompdf\Css\Stylesheet;
-use Dompdf\Dompdf;
-use Dompdf\Options;
+use App\Dto\GeneratorRequest;
+use Exception;
 use mikehaertl\wkhtmlto\Pdf;
 
 class DocumentGeneratorService
 {
-    public function generate(HtmlStructRequest $htmlStructRequest): string
+    /**
+     * @throws Exception
+     */
+    public function generate(GeneratorRequest $pageContent): string
     {
-        $pdf = new Pdf();
+        $options = [
+            'encoding' => 'UTF-8',
+            'ignoreWarnings' => true,
+            'orientation' => $pageContent->getOrientation(),
+            'page-width' => $pageContent->getWidth(),
+            'page-height' => $pageContent->getHeight(),
+        ];
 
-        foreach ($htmlStructRequest->getHtml() as $page) {
-            $pdf->addPage($page);
+        $pdf = new Pdf();
+        $pdf->setOptions($options);
+
+        $pdf->addPage($pageContent->getHtml());
+
+        if ($output = $pdf->toString()) {
+            return $output;
         }
 
-
-        return $pdf->toString();
-//        $dompdf = new Dompdf();
-//        $dompdf->setPaper($htmlStructRequest->getPaper(), $htmlStructRequest->getOrientation());
-//
-//        $option = new Options();
-//        $option->setIsRemoteEnabled(true);
-//        $dompdf->setOptions($option);
-//
-//        $html = $htmlStructRequest->getHtml();
-//
-//        if (null !== $htmlStructRequest->getCss()){
-//            $requestStyle = $htmlStructRequest->getCss();
-//            $css = new Stylesheet($dompdf);
-//            $css->load_css($requestStyle);
-//            $dompdf->setCss($css);
-//        }
-//
-//        $dompdf->loadHtml($html);
-//
-//        $dompdf->render();
-//
-//        return $dompdf->output();
+        throw new Exception($pdf->getError());
     }
 }
