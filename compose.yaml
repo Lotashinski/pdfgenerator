@@ -3,6 +3,8 @@ version: '3'
 services:
   nginx:
     image: nginx:stable-alpine
+  php-fpm:
+
 
 ###> doctrine/doctrine-bundle ###
 #  database:
