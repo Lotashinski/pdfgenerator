@@ -28,7 +28,7 @@ services:
       - DATABASE_URL="postgresql://${DATABASE_USER:-app}:${DATABASE_PASSWORD:?error}@database:5432/${DATABASE_DB:-app}?serverVersion=15&charset=utf8"
     volumes:
       - ./app:/var/www/html:rw
-      - ./log/app:/var/www/html/var/log
+      - ./log/app:/var/www/html/var/log:rw
       - storage_app:/var/www/html/var/storage:rw
 
 
