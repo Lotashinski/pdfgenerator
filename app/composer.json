@@ -19,12 +19,15 @@
         "symfony/dotenv": "6.3.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.3.*",
+        "symfony/monolog-bundle": "^3.10",
         "symfony/property-access": "6.3.*",
         "symfony/property-info": "6.3.*",
         "symfony/runtime": "6.3.*",
         "symfony/security-bundle": "6.3.*",
         "symfony/serializer": "6.3.*",
+        "symfony/twig-bundle": "6.3.*",
         "symfony/yaml": "6.3.*",
+        "twig/extra-bundle": "^3.8",
         "twig/intl-extra": "^3"
     },
     "config": {

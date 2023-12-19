@@ -1,0 +1,411 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container">
+        <main class="container-main">
+            <article id="about">
+                <h2>О сервисе</h2>
+                <section>
+                    <h3>Назначение</h3>
+                    <p>
+                        Сервис предоставляет JSON-API для генерации Pdf документов из HTML разметки с использованием
+                        рендеринга,
+                        совместимого с CSS 3.
+                    </p>
+                    <p>
+                        Поддерживается большинсво HTML элементов, поддержка загрузки внешних стилей, встроенных тегов
+                        стилей и атрибуты стилей отдельных HTML тегов.
+                    </p>
+                    <p>
+                        Есть возможность обработки <code>JavaScript</code>.
+                    </p>
+                </section>
+                <section>
+                    <h3>Функции</h3>
+                    <ul>
+                        <li>
+                            <p>
+                                Обрабатывает большинство свойств CSS 3, включая правила
+                                <code class="code">@import</code>, <code class="code">@media</code> и <code
+                                        class="code">@page</code>.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Поддерживает большинство презентационных атрибутов HTML 4.0 и HTML 5.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Поддерживает внешние таблицы стилей.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Поддерживает сложные таблицы, включая диапазоны строк и столбцов, отдельные и свернутые
+                                модели границ, индивидуальный стиль ячеек.
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Поддержка изображений (gif, png (8, 24 и 32 бит с альфа-каналом), bmp и jpeg).
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                Базовая поддержка SVG.
+                            </p>
+                        </li>
+                    </ul>
+                </section>
+            </article>
+
+            <article id="security">
+                <h2>Безопасность</h2>
+
+                <p>
+                    Доступ к АПИ для генерации документов доступна только с использованием АПИ ключа. Сгенерировать
+                    ключь можно в <a href="/room">личном кабинете</a> (доступ предаставляется сотрудникам
+                    университета по заявке).
+                </p>
+                <p>
+                    Доступ к файлам на сервере доступна по ссылке на файл.
+                </p>
+                <p>
+                    Апи ключь к сервису передается через HTTP заголовок <code class="code">X-AUTH-KEY</code>.
+                </p>
+            </article>
+
+            <article id="styles">
+                <h2>Стили</h2>
+                <section>
+                    <h3>Стили документа</h3>
+                    <p>
+                        Для назначения стилей документа можно воспользоваться тегом
+                        <code class="code">&lt;style&gt;</code>, или задать стиль елемента через атрибут <code
+                                class="code">style</code>. Поддерживается возможность загружать стили через
+                        <code class="code">@import</code>
+                    </p>
+                </section>
+                <section>
+                    <h3>Внешние таблицы стилей</h3>
+                    <p>
+                        Сервис поддерживает CSS 3. Для подключения внешних таблиц стилей можно воспользоваться
+                        средставами HTML. Загрузка CSS должна быть доступна по ссылке.
+                    </p>
+                    <pre class="code">&lt;link href="/media/examples/link-element-example.css" rel="stylesheet"/&gt;</pre>
+                </section>
+            </article>
+
+            <article id="fonts">
+                <h2>Шрифты</h2>
+                <section>
+                    <h3>Встроенные и загружаемые шрифты</h3>
+                    <p>
+                        PDF-документы внутренне поддерживают следующие шрифты: <code>Helvetica</code>,
+                        <code>Times-Roman</code>, <code>Courier</code>, <code>Zapf-Dingbats</code> и <code>Symbol</code>.
+                        Эти шрифты поддерживают только кодировку Windows ANSI. Чтобы в PDF-файле отображались символы,
+                        недоступные в Windows ANSI, необходимо указать внешний шрифт. Есть возможность встроит любой
+                        указанный шрифт в PDF-файл, если доступен по ссылке правилах CSS
+                        <code class="code">@font-face</code>.
+                    </p>
+                    <p>
+                        По умолчанию используется шрифт <code>DejaVuSerif</code>.
+                    </p>
+                </section>
+                <section>
+                    <h3>Загружаемые шрифты через CSS</h3>
+                    <p>
+                        CSS позволяет загружать стронние шрифты через дерективу <code class="code">@font-face</code>.
+                        Разместите ссылку на подключаемый CSS файл в разметку HTML. Загрузка внешних ресурсов должна
+                        быть доступна сервису.
+                    </p>
+                </section>
+
+                <section>
+                    <h3>MIME-типы поддерживаемых шрифтов</h3>
+                    <div class="scroll-x">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Формат</th>
+                                <th>MIME-тип</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>TrueType</td>
+                                <td><code>font/ttf</code></td>
+                            </tr>
+                            <tr>
+                                <td>OpenType</td>
+                                <td><code>font/otf</code></td>
+                            </tr>
+                            <tr>
+                                <td>Web Open File Format</td>
+                                <td><code>font/woff</code></td>
+                            </tr>
+                            <tr>
+                                <td>Web Open File Format 2</td>
+                                <td><code>font/woff2</code></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Пример подключения внешних шрифтов</h3>
+                    <pre class="code">
+/* Пример с использованием шрифтов Google */
+@import url('https://fonts.googleapis.com/css2?family=Nova+Square&family=Roboto:ital,wght@0,100;0,400;1,100;1,500&family=Rubik+Bubbles&display=swap');
+
+body {
+    font-family: 'Roboto' sans-serif;
+}
+</pre>
+                </section>
+            </article>
+
+            <article id="pages">
+                <h2>Разбиение на страницы и ориентация</h2>
+                <section>
+                    <h3>Размер страницы</h3>
+                    <p>
+                        По умолчанию используется формат А4 в портретной ориентации. При переполнении страницы,
+                        автоматически выполнится переход на новую.
+                    </p>
+                    <p>
+                        Сервис поддерживает пользовательские размеры и изменение ориентации.
+                    </p>
+                </section>
+            </article>
+
+            <article id="storage">
+                <h2>Сохранение на сервере</h2>
+
+                <p>
+                    Сервис позволяет сохранять сгенерированные документы и отдавать их пот требованию.
+                </p>
+
+            </article>
+
+            <article id="endpoints">
+                <h2>Запросы к апи</h2>
+                <section>
+                    <h3><code class="code bg-light">POST</code> <code class="code">/generator</code></h3>
+                    <section>
+                        <h4>Назначение</h4>
+                        <p>
+                            Генерирует PDF из HTML разметки.
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Описание запроса</h4>
+                        <dl>
+                            <dt>
+                                <code class="code bg-light">Content-Type</code>
+                            </dt>
+                            <dd>
+                                <code>application/json</code>
+                            </dd>
+                            <dt>
+                                <code class="code bg-light">Авторизация</code>
+                            </dt>
+                            <dd>
+                                <code>Api-key</code>
+                                <p>
+                                    Передается через заголовок <code class="code">API-KEY</code> в формате
+                                    <code class="code">API-KEY: VALUE</code>
+                                </p>
+                            </dd>
+                            <dt>
+                                <code class="code bg-light">Charset</code>
+                            </dt>
+                            <dd>
+                                <code>utf-8</code>
+                            </dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <h4>Структура запроса</h4>
+                        <div class="scroll-x">
+                            <table>
+                                <caption>Корневой элемент</caption>
+                                <thead>
+                                <tr>
+                                    <th>Параметр</th>
+                                    <th>Тип</th>
+                                    <th>Описание</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><code>html</code><sup>*</sup></td>
+                                    <td><code>string</code></td>
+                                    <td><p>Строка с разметкой документа. Специальные символы должны быть
+                                            экранированы.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>saveFile</code></td>
+                                    <td><code>boolean</code></td>
+                                    <td>
+                                        <p>Флаг для сохранения на сервере.</p>
+                                        <p>Значение по умолчанию: <code class="code">false</code>.</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>orientation</code></td>
+                                    <td><code>string</code></td>
+                                    <td>
+                                        <p> Флаг для сохранения на сервере. </p>
+                                        <p> Допустимые значения:
+                                            <code class="code">"portrait"</code>, <code class="code">"landscape"</code>.
+                                        </p>
+                                        <p> Значение по умолчанию: <code class="code">"portrait"</code>. </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>width</code></td>
+                                    <td><code>integer</code></td>
+                                    <td>
+                                        <p>
+                                            Устанавливает ширину документа в милиметрах. При использовании
+                                            <code class="code">"orientation": "landscape"</code> выступает как высота
+                                            документа.
+                                        </p>
+                                        <p> Значение по умолчанию: <code class="code">210</code>. </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>height</code></td>
+                                    <td><code>integer</code></td>
+                                    <td>
+                                        <p>
+                                            Устанавливает высоту документа в милиметрах. При использовании
+                                            <code class="code">"orientation": "landscape"</code> выступает как ширина
+                                            документа.
+                                        </p>
+                                        <p> Значение по умолчанию: <code class="code">297</code>. </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <p><sup>*</sup> - обязательный параметр.</p>
+                    </section>
+                    <section>
+                        <h4>Описание ответа без сохранения сервере</h4>
+                        <dl>
+                            <dt><code class="code bg-light">Content-Type</code></dt>
+                            <dd><code>application/pdf</code></dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <h4>Описание ответа при сохранении на сервере</h4>
+                        <dl>
+                            <dt><code class="code bg-light">Content-Type</code></dt>
+                            <dd><code>application/json</code></dd>
+                            <dt><code class="code bg-light">Charset</code></dt>
+                            <dd><code>utf-8</code></dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <h4>Структура ответа при сохранении на сервере</h4>
+                        <div class="scroll-x">
+                            <table>
+                                <caption>Корневой элемент</caption>
+                                <thead>
+                                <tr>
+                                    <th>Параметр</th>
+                                    <th>Тип</th>
+                                    <th>Описание</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><code>file_name</code></td>
+                                    <td><code>string</code></td>
+                                    <td><p>Содержит идентификатор файла, для последуещего получения.</p></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <h3><code class="code bg-light">GET</code> <code class="code">/file?file_name=file_id</code></h3>
+                    <p>
+                        Отдает сохраненные документы с сервера.
+                    </p>
+                    <section>
+                        <h4>URL параметры</h4>
+                        <p>
+                            <code class="code bg-light">file_name</code>: идентификатор файла, полученый при генерации с
+                            сохренением на сервере.
+                        </p>
+                    </section>
+                    <section>
+                        <h4>Описание запроса</h4>
+                        <dl>
+                            <dt>
+                                <code class="code bg-light">Авторизация</code>
+                            </dt>
+                            <dd>
+                                Не требуется
+                            </dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <h4>Описание ответа</h4>
+                        <dl>
+                            <dt><code class="code bg-light">Content-Type</code></dt>
+                            <dd><code>application/pdf</code></dd>
+                        </dl>
+                    </section>
+                </section>
+            </article>
+        </main>
+        <aside class="container-secondary">
+            <h2>Содержание</h2>
+            <nav class="aside-nav">
+                <ul>
+                    <li>
+                        <a href="#about">О сервисе</a>
+                    </li>
+                    <li>
+                        <a href="#security">Безопасность</a>
+                    </li>
+                    <li>
+                        <a href="#styles">Стили</a>
+                    </li>
+                    <li>
+                        <a href="#fonts">Шрифты</a>
+                    </li>
+                    <li>
+                        <a href="#pages">Разбиение на страницы и ориентация</a>
+                    </li>
+                    <li>
+                        <a href="#storage">Сохранение на сервере</a>
+                    </li>
+                    <li>
+                        <a href="#endpoints">Запросы к апи</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    <footer>
+        <article class="center-column">
+            <h4>
+                ИАЦ ГрГУ имени Янки Купалы
+            </h4>
+            <time>
+                2023
+            </time>
+        </article>
+    </footer>
+{% endblock %}
