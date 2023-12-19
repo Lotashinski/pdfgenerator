@@ -17,19 +17,15 @@ class User implements UserInterface
     #[ORM\Column]
     private ?int $tnn = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+    #[ORM\Column(length: 180)]
     private ?string $username = null;
 
     #[ORM\Column]
     private array $roles = [];
 
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: ApiKey::class, orphanRemoval: true)]
-    private Collection $apiKeys;
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
 
-    public function __construct()
-    {
-        $this->apiKeys = new ArrayCollection();
-    }
 
     public function getTnn(): ?int
     {
@@ -55,7 +51,7 @@ class User implements UserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->username;
+        return $this->getUsername();
     }
 
     /**
@@ -86,32 +82,14 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection<int, ApiKey>
-     */
-    public function getApiKeys(): Collection
+    public function getEmail(): ?string
     {
-        return $this->apiKeys;
+        return mb_strtolower($this->email);
     }
 
-    public function addApiKey(ApiKey $apiKey): static
+    public function setEmail(string $email): static
     {
-        if (!$this->apiKeys->contains($apiKey)) {
-            $this->apiKeys->add($apiKey);
-            $apiKey->setOwner($this);
-        }
-
-        return $this;
-    }
-
-    public function removeApiKey(ApiKey $apiKey): static
-    {
-        if ($this->apiKeys->removeElement($apiKey)) {
-            // set the owning side to null (unless already changed)
-            if ($apiKey->getOwner() === $this) {
-                $apiKey->setOwner(null);
-            }
-        }
+        $this->email = $email;
 
         return $this;
     }

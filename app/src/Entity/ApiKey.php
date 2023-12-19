@@ -16,10 +16,6 @@ class ApiKey implements UserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'apiKeys')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $owner = null;
-
     #[ORM\Column(length: 255, unique: true)]
     private ?string $value = null;
 
@@ -29,21 +25,15 @@ class ApiKey implements UserInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $creator = null;
+
+    #[ORM\Column]
+    private ?int $creatorTnn = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(?User $owner): static
-    {
-        $this->owner = $owner;
-
-        return $this;
     }
 
     public function getValue(): ?string
@@ -82,18 +72,42 @@ class ApiKey implements UserInterface
         return $this;
     }
 
+    public function getUserIdentifier(): string
+    {
+        return $this->getService();
+    }
+
     public function getRoles(): array
     {
-        return $this->getOwner()->getRoles();
+        return ['ROLE_SERVICE'];
     }
 
     public function eraseCredentials(): void
     {
-        $this->getOwner()->eraseCredentials();
+
     }
 
-    public function getUserIdentifier(): string
+    public function getCreator(): ?string
     {
-        return $this->getService();
+        return $this->creator;
+    }
+
+    public function setCreator(string $creator): static
+    {
+        $this->creator = $creator;
+
+        return $this;
+    }
+
+    public function getCreatorTnn(): ?int
+    {
+        return $this->creatorTnn;
+    }
+
+    public function setCreatorTnn(int $creatorTnn): static
+    {
+        $this->creatorTnn = $creatorTnn;
+
+        return $this;
     }
 }

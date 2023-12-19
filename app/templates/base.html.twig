@@ -20,7 +20,7 @@
 <body>
 {% block body %}
     <div class="wrapper">
-        {% block nav %}
+
             <header>
 
                 <a class="header-logo" href="/">
@@ -30,10 +30,15 @@
                     <h1>
                         Pdf generator guide
                     </h1>
-                    <a href="/login">Вход</a>
+                    {% block nav %}
+                        {% if is_granted("IS_AUTHENTICATED") %}
+                            <a href="{{ path('services') }}">Мои сервисы</a>
+                        {% else %}
+                            <a href="/login">Вход</a>
+                        {% endif %}
+                    {% endblock %}
                 </div>
             </header>
-        {% endblock %}
 
         {% block main %}
         {% endblock %}

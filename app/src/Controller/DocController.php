@@ -10,15 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DocController extends AbstractController
 {
-    public function __construct(private readonly LoggerInterface $logger)
-    {
-
-    }
-
     #[Route('/', name: 'app_doc', methods: ["GET"])]
     public function index(): Response
     {
-        $this->logger->debug("11111111");
         return $this->render('doc/index.html.twig', [
             'controller_name' => 'DocController',
         ]);

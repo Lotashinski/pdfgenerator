@@ -1,0 +1,31 @@
+.modal {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-medium-light);
+}
+
+.modal-head {
+    background-color: var(--bc-content);;
+    display: flex;
+    width: min(max(480px, 50%), 100vw);
+    padding: 0.5rem;
+    border-bottom: .5rem solid var(--primary);
+}
+
+.modal-head > *:first-child {
+    flex-grow: 1;
+}
+
+.modal-content {
+    background-color: var(--bc-content);
+    display: flex;
+    width: min(max(480px, 50%), 100vw);
+    padding: 0.5rem;
+}

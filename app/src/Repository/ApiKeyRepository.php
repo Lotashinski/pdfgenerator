@@ -11,7 +11,6 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method ApiKey|null find($id, $lockMode = null, $lockVersion = null)
  * @method ApiKey|null findOneBy(array $criteria, array $orderBy = null)
- * @method ApiKey[]    findAll()
  * @method ApiKey[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class ApiKeyRepository extends ServiceEntityRepository
@@ -19,6 +18,14 @@ class ApiKeyRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ApiKey::class);
+    }
+
+    public function findAll(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.service', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**
