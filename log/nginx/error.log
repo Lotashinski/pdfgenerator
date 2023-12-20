@@ -634,3 +634,25 @@
 2023/12/19 18:31:53 [notice] 1#1: start worker process 21
 2023/12/19 18:31:53 [notice] 1#1: start worker process 22
 2023/12/19 18:45:02 [alert] 21#21: *134 sendfile() reported that "/var/www/html/public/css/styles.css" was truncated at 6425 while sending response to client, client: 172.18.0.1, server: app.local, request: "GET /css/styles.css HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/services"
+2023/12/20 07:49:34 [notice] 1#1: using the "epoll" event method
+2023/12/20 07:49:34 [notice] 1#1: nginx/1.25.3
+2023/12/20 07:49:34 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2023/12/20 07:49:34 [notice] 1#1: OS: Linux 6.5.0-14-generic
+2023/12/20 07:49:34 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2023/12/20 07:49:34 [notice] 1#1: start worker processes
+2023/12/20 07:49:34 [notice] 1#1: start worker process 21
+2023/12/20 07:49:34 [notice] 1#1: start worker process 22
+2023/12/20 07:49:34 [notice] 1#1: start worker process 23
+2023/12/20 07:49:34 [notice] 1#1: start worker process 24
+2023/12/20 07:49:34 [notice] 1#1: start worker process 25
+2023/12/20 07:49:34 [notice] 1#1: start worker process 26
+2023/12/20 07:49:34 [notice] 1#1: start worker process 27
+2023/12/20 07:49:34 [notice] 1#1: start worker process 28
+2023/12/20 07:49:34 [notice] 1#1: start worker process 29
+2023/12/20 07:49:34 [notice] 1#1: start worker process 30
+2023/12/20 07:49:34 [notice] 1#1: start worker process 31
+2023/12/20 07:49:34 [notice] 1#1: start worker process 32
+2023/12/20 07:49:34 [notice] 1#1: start worker process 33
+2023/12/20 07:49:34 [notice] 1#1: start worker process 34
+2023/12/20 07:49:34 [notice] 1#1: start worker process 35
+2023/12/20 07:49:34 [notice] 1#1: start worker process 36

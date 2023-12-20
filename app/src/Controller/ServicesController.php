@@ -27,9 +27,9 @@ class ServicesController extends AbstractController
     public function index(): Response
     {
         $user = $this->getUser();
-        if (in_array('ROLE_ADMIN', $user->getRoles())){
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
             $keys = $this->apiKeyRepository->findAll();
-        }else{
+        } else {
             $keys = $this->apiKeyRepository->findBy(['creatorTnn' => $user->getTnn()], ['service' => 'ASC']);
         }
 
@@ -63,7 +63,27 @@ class ServicesController extends AbstractController
         return $this->redirectToRoute('services');
     }
 
-    #[Route('/services/{id<\d+>}', name: 'services_delete', methods: ["DELETE", "POST"])]
+    #[Route('/services/{id<\d+>}/update', name: 'services_update', methods: ["PUT", "POST"])]
+    public function updateService(ApiKey $service, Request $request): Response
+    {
+        $submittedToken = $request->request->get('token');
+        if (!$this->isCsrfTokenValid('update-item', $submittedToken)) {
+            throw new ForbiddenException("Invalid csrf token");
+        }
+
+        $service->setService($request->get('service'));
+        $service->setDescription($request->get('description'));
+
+        if ($request->get("regenerate", false) === "on") {
+            $service->setValue(new RandomString(34) . "");
+        }
+
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('services');
+    }
+
+    #[Route('/services/{id<\d+>}/delete', name: 'services_delete', methods: ["DELETE", "POST"])]
     public function deleteService(ApiKey $apiKey, Request $request): Response
     {
         $submittedToken = $request->request->get('token');

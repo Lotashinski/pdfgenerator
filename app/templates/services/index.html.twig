@@ -52,9 +52,7 @@
                                     </td>
                                     <td>{{ service.creator }}</td>
                                     <td>
-                                        <form action="{{ path('services_delete', {'id': service.id }) }}" method="post">
-                                            <button>Исправить</button>
-                                        </form>
+                                        <button onclick="showModal('update_item_{{ service.id }}')">Исправить</button>
 
                                         <form action="{{ path('services_delete', {'id': service.id }) }}" method="post">
                                             <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}"/>
@@ -65,6 +63,43 @@
                             {% endfor %}
                         </table>
                     {% endif %}
+                </section>
+                <section>
+                    {% for service in services %}
+                        <section id="update_item_{{ service.id }}" class="modal">
+                            <section class="modal-head">
+                                <h3>{{ service.service }} </h3>
+                                <button onclick="closeModal('update_item_{{ service.id }}')" class="brad-5">✖</button>
+                            </section>
+                            <section class="modal-content">
+                                <form action="{{ path('services_update', {'id': service.id }) }}" method="post">
+                                    <input type="hidden" name="token"
+                                           value="{{ csrf_token('update-item') }}"/>
+                                    <label for="update_service_title_{{ service.id }}">
+                                        Название сервиса
+                                    </label>
+                                    <input type="text" name="service"
+                                           id="update_service_title_{{ service.id }}"
+                                           value="{{ service.service }}"
+                                    >
+                                    <label for="update_service_description_{{ service.id }}">
+                                        Описание
+                                    </label>
+                                    <textarea name="description"
+                                              id="update_service_description_{{ service.id }}">
+                                    {{ service.description }}
+                                    </textarea>
+                                    <div>
+                                        <input type="checkbox" name="regenerate"
+                                               id="update_service_regenerate_{{ service.id }}"
+                                        >
+                                        <label for="update_service_regenerate_{{ service.id }}">Сгенерировать новый ключь</label>
+                                    </div>
+                                    <input type="submit" value="Сохранить">
+                                </form>
+                            </section>
+                        </section>
+                    {% endfor %}
                 </section>
             </article>
         </main>
