@@ -5,16 +5,18 @@ namespace App\Controller;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DocController extends AbstractController
 {
     #[Route('/', name: 'app_doc', methods: ["GET"])]
-    public function index(): Response
+    public function index(#[Autowire('%env(resolve:BEARER_HEADER)%')] string $header): Response
     {
         return $this->render('doc/index.html.twig', [
             'controller_name' => 'DocController',
+            'header' => $header,
         ]);
     }
 }

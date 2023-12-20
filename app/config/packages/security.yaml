@@ -24,13 +24,18 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             switch_user: true
         api:
-
+            pattern: ^/generator
+            stateless: true
+            access_token:
+                token_handler: App\Service\Security\AccessTokenHandler
+                token_extractors: App\Service\Security\ApiTokenExtractor
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
          - { path: ^/services, roles: ROLE_USER }
+         - { path: ^/generator, roles: ROLE_SERVICE }
 
 when@test:
     security:
