@@ -43,7 +43,7 @@ class ApiKey implements UserInterface
 
     public function setValue(string $value): static
     {
-        $this->value = $value;
+        $this->value = trim($value);
 
         return $this;
     }
@@ -55,7 +55,7 @@ class ApiKey implements UserInterface
 
     public function setService(string $service): static
     {
-        $this->service = $service;
+        $this->service = trim($service);
 
         return $this;
     }
@@ -67,7 +67,7 @@ class ApiKey implements UserInterface
 
     public function setDescription(?string $description): static
     {
-        $this->description = $description;
+        $this->description = trim($description);
 
         return $this;
     }
@@ -94,7 +94,7 @@ class ApiKey implements UserInterface
 
     public function setCreator(string $creator): static
     {
-        $this->creator = $creator;
+        $this->creator = trim($creator);
 
         return $this;
     }
