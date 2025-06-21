@@ -1,22 +1,23 @@
-FROM php:8.2-fpm
+FROM debian:bookworm
 
 LABEL authors="alexander"
 
 RUN  apt-get update \
-  && apt-get install -y wkhtmltopdf
+  && apt-get install -y wkhtmltopdf 
 
 RUN  apt-get -y update \
-  && apt-get install -y libicu-dev libzip-dev zip \
-  && docker-php-ext-configure intl \
-  && docker-php-ext-install intl zip mysqli pdo pdo_mysql \
-  && docker-php-ext-enable pdo_mysql \
-  && docker-php-source delete
+  && apt-get install -y php php-intl php-zip php-xml \
+  && apt-get clean
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-
 WORKDIR /var/www/html
+COPY ./ ./
+RUN composer install
+RUN chmod 777 ./var -R 
 
-CMD composer install \
-    && chmod 777 ./var -R \
-    && ./bin/console doctrine:migrations:migrate \
-    && php-fpm
+RUN apt-get update && apt-get install -y nginx php-fpm && apt-get clean
+COPY ./server.conf /etc/nginx/sites-available/default
+EXPOSE 80
+
+RUN chmod +x ./start.sh
+CMD ./start.sh

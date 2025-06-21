@@ -7,6 +7,7 @@ use App\Dto\GeneratorRequest;
 use App\Service\DocumentGeneratorService;
 use App\Service\PdfStoreService;
 use App\Util\RandomString;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,13 +20,13 @@ use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 
 #[AsController]
-class PdfGenerate
+class PdfGenerate extends AbstractController
 {
     public function __construct(
         private readonly SerializerInterface      $serializer,
         private readonly DocumentGeneratorService $documentGeneratorService,
         private readonly PdfStoreService          $pdfStoreService,
-        private readonly Security                 $security,
+        #private readonly Security                 $security,
     )
     {
     }
@@ -33,6 +34,16 @@ class PdfGenerate
     /**
      * @throws \Exception
      */
+    #[Route('/generator', name: 'pdf_generator_page', methods: ['GET'])]
+    public function generatorPage(): Response
+    {
+        return new Response(
+            $this->renderView('services/index.html.twig', [
+                'services' => [], 
+            ])
+        );
+    }
+
     #[Route('/generator', name: 'app_pdf_generator', methods: ['POST'])]
     public function generate(Request $request): Response
     {
@@ -58,8 +69,8 @@ class PdfGenerate
 
     private function saveFile(string $pdf): Response
     {
-        $user = $this->security->getUser();
-        $salt = $user?->getUserIdentifier() ?? (new RandomString(8));
+        #$user = $this->security->getUser();
+        $salt = (new RandomString(8));
         $fileName = (new \DateTimeImmutable())->format('Ymd\THis') . $salt . '.pdf';
         $this->pdfStoreService->save($fileName, $pdf);
         return new JsonResponse(["file_name" => $fileName], Response::HTTP_CREATED);

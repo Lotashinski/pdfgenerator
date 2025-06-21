@@ -10,25 +10,6 @@
             <article id="services">
                 <h2>Управление сервисами</h2>
                 <section>
-                    <button onclick="showModal('new')">Сгенерировать новый ключ</button>
-                    <section id="new" class="modal">
-                        <section class="modal-head">
-                            <h3>Новый сервис</h3>
-                            <button onclick="closeModal('new')" class="brad-5">✖</button>
-                        </section>
-                        <section class="modal-content">
-                            <form action="{{ path('services_new') }}" method="post">
-                                <input type="hidden" name="token" value="{{ csrf_token('create-item') }}"/>
-                                <label for="new_service_title">Название сервиса</label>
-                                <input type="text" name="service" id="new_service_title">
-                                <label for="new_service_description">Описание</label>
-                                <textarea name="description" id="new_service_description"></textarea>
-                                <input type="submit" value="Сохранить">
-                            </form>
-                        </section>
-                    </section>
-                </section>
-                <section>
                     <h3>Сгенерированные ключи</h3>
                     {% if services|length == 0 %}
                         <p>Сервисов пока нет...</p>
@@ -51,14 +32,6 @@
                                         <code class="code" id="key_{{ service.id }}">{{ service.value }}</code>
                                     </td>
                                     <td>{{ service.creator }}</td>
-                                    <td>
-                                        <button onclick="showModal('update_item_{{ service.id }}')">Исправить</button>
-
-                                        <form action="{{ path('services_delete', {'id': service.id }) }}" method="post">
-                                            <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}"/>
-                                            <button class="bg-medium">Удалить</button>
-                                        </form>
-                                    </td>
                                 </tr>
                             {% endfor %}
                         </table>
