@@ -31,11 +31,8 @@
                         Pdf generator guide
                     </h1>
                     {% block nav %}
-                        {% if is_granted("IS_AUTHENTICATED") %}
-                            <a href="{{ path('services') }}">Мои сервисы</a>
-                        {% else %}
-                            <a href="/login">Вход</a>
-                        {% endif %}
+                        <!-- Навигация без ссылки на вход -->
+                        <a href="/">Главная</a>
                     {% endblock %}
                 </div>
             </header>

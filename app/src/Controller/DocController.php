@@ -11,11 +11,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class DocController extends AbstractController
 {
     #[Route('/', name: 'app_doc', methods: ["GET"])]
-    public function index(#[Autowire('%env(resolve:BEARER_HEADER)%')] string $header): Response
+    public function index(): Response
     {
         return $this->render('doc/index.html.twig', [
             'controller_name' => 'DocController',
-            'header' => $header,
+            'header' => "",
         ]);
     }
-}
+} 
