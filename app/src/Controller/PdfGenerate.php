@@ -31,19 +31,6 @@ class PdfGenerate extends AbstractController
     {
     }
 
-    /**
-     * @throws \Exception
-     */
-    #[Route('/generator', name: 'pdf_generator_page', methods: ['GET'])]
-    public function generatorPage(): Response
-    {
-        return new Response(
-            $this->renderView('services/index.html.twig', [
-                'services' => [], 
-            ])
-        );
-    }
-
     #[Route('/generator', name: 'app_pdf_generator', methods: ['POST'])]
     public function generate(Request $request): Response
     {
